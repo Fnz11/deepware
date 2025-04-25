@@ -1,0 +1,18 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://gitd3ti.vokasi.uns.ac.id/Reinol14/web-bkpsdm.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+	vscode-merge-base = origin/main
+[branch "be-pelatihan"]
+	remote = origin
+	merge = refs/heads/be-pelatihan
+	vscode-merge-base = origin/be-pelatihan

@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 961d0298cab23f5edbc49b0737828879a78799f5 ysFik <finz1112@gmail.com> 1744700392 +0700	clone: from https://gitd3ti.vokasi.uns.ac.id/Reinol14/web-bkpsdm.git
+961d0298cab23f5edbc49b0737828879a78799f5 b781f9ce47bf84d4d9cdab4e792cc7677255ab74 ysFik <finz1112@gmail.com> 1744701206 +0700	checkout: moving from main to be-pelatihan
+b781f9ce47bf84d4d9cdab4e792cc7677255ab74 961d0298cab23f5edbc49b0737828879a78799f5 ysFik <finz1112@gmail.com> 1744701904 +0700	checkout: moving from be-pelatihan to main
+961d0298cab23f5edbc49b0737828879a78799f5 b781f9ce47bf84d4d9cdab4e792cc7677255ab74 ysFik <finz1112@gmail.com> 1744701913 +0700	checkout: moving from main to be-pelatihan
+b781f9ce47bf84d4d9cdab4e792cc7677255ab74 e091e8c189747e08a46e610a0868069e0dbe3a74 ysFik <finz1112@gmail.com> 1744875385 +0700	commit: feat: prepare layout dashboard
+e091e8c189747e08a46e610a0868069e0dbe3a74 2d8818ffc511c9982a2b9cf1b5aec2ef1a81a77c ysFik <finz1112@gmail.com> 1744875395 +0700	pull --tags origin be-pelatihan: Merge made by the 'ort' strategy.
+2d8818ffc511c9982a2b9cf1b5aec2ef1a81a77c 90e8482408f693662031bea36bea5e414c5e1c86 ysFik <finz1112@gmail.com> 1745459522 +0700	commit: feat: add pelatihan layout, dashboard, and create

@@ -1,7 +1,9 @@
 <div class="sidebar">
     <img src="{{ asset('images/logoBkpsdm.svg') }}" class="mb-2 " width="200" alt="Logo BKPSDM">
     <ul class="nav flex-column list-unstyled">
-        <li><a href="#" class="nav-link"><i class="bi bi-grid-fill nav-icon"></i> Dashboard</a></li>
+        <li><a href="{{ route('dashboard.pelatihan.dashboard') }}" class="nav-link">
+            <i class="bi bi-grid-fill nav-icon"></i> Dashboard
+        </a></li>
         <li><a href="#" class="nav-link"><i class="bi bi-link-45deg nav-icon"></i> Link Drive Kegiatan</a></li>
         <li><a href="#" class="nav-link"><i class="bi bi-bar-chart-line nav-icon"></i> IP ASN <i
                     class="bi bi-chevron-down"></i></a></li>
@@ -75,8 +77,46 @@
             </ul>
         </li>
 
-        <li><a href="#" class="nav-link"><i class="bi bi-award-fill nav-icon"></i> 2.Pelatihan <i
-                    class="bi bi-chevron-down"></i></a></li>
+        <li>
+            <a href="javascript:void(0);" class="nav-link active-parent" onclick="toggleSubmenu('pelatihan', 'icon-pelatihan')">
+                <i class="bi bi-award-fill nav-icon"></i> 2.Pelatihan 
+                <i id="icon-pelatihan" class="bi bi-chevron-up"></i>
+            </a>
+            <ul id="pelatihan" class="submenu list-unstyled show">
+                <li>
+                    <a href="{{ route('dashboard.pelatihan.reverensi') }}" class="nav-link">
+                        <i class="bi bi-journal-bookmark nav-icon"></i> Referensi
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.pelatihan.daftar') }}" class="nav-link">
+                        <i class="bi bi-list-check nav-icon"></i> Daftar Pelatihan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('Dashboard.Pelatihan.proses-laporan') }}" class="nav-link">
+                        <i class="bi bi-gear nav-icon"></i> Proses Laporan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('Dashboard.Pelatihan.laporan-pelatihan') }}" class="nav-link">
+                        <i class="bi bi-file-text nav-icon"></i> Laporan Pelatihan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('Dashboard.Pelatihan.usul-pelatihan') }}" class="nav-link">
+                        <i class="bi bi-file-earmark-plus nav-icon"></i> Laporan Usul Pelatihan
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{{ route('Dashboard.Pelatihan.Kepegawaian.index') }}" class="nav-link">
+                <i class="bi bi-people-fill nav-icon"></i> Kepegawaian
+            </a>
+        </li>
+
         <li><a href="#" class="nav-link"><i class="bi bi-people-fill nav-icon"></i> 3.Alumni Pelatihan <i
                     class="bi bi-chevron-down"></i></a></li>
         <li><a href="#" class="nav-link"><i class="bi bi-journal-richtext nav-icon"></i> Directory Pelatihan <i

@@ -11,9 +11,20 @@ class DeepwarePelatihanController extends Controller
         return view('pelatihan.index');
     }
 
+
     public function show($id)
     {
         return view('pelatihan.show', compact('id'));
+    }
+
+    public function reverensi()
+    {
+        return view('Dashboard.Pelatihan.reverensi-pelatihan');
+    }
+
+    public function dashboard()
+    {
+        return view('Dashboard.Pelatihan.dashboard');
     }
 
     public function pendaftaran()

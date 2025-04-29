@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeepwarePelatihanController;
+use App\Http\Controllers\DeepwarePelatihanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -26,6 +27,9 @@ use App\Http\Controllers\Auth\UserEvaluasiController;
 use App\Http\Controllers\Admin\Evaluasi\AlumniAdminController;
 use App\Http\Controllers\Admin\Evaluasi\AtasanAdminController;
 use App\Http\Controllers\Admin\Evaluasi\PertanyaanController;
+use App\Http\Controllers\Admin\Pelatihan\DeepwarePelatihanLaporanController;
+use App\Http\Controllers\Admin\Pelatihan\DeepwarePelatihanRegistrasiController;
+use App\Http\Controllers\Admin\Pelatihan\DeepwarePelatihansController;
 use App\Http\Controllers\Admin\Pelatihan\PelatihanAdminController;
 use App\Http\Controllers\Umum\Akpk\AkpkController;
 use App\Http\Controllers\Auth\LoginAkpkController;
@@ -45,22 +49,48 @@ Route::get('/', function () {
 Route::get('/pelatihan', [DeepwarePelatihanController::class, 'index'])->name('pelatihan.index');
 Route::get('/pelatihan/{id}', [DeepwarePelatihanController::class, 'show'])->name('pelatihan.show');
 
+Route::middleware(['role:admin|superadmin'])->group(function () {
+    // Route::get('/pelatihan', [DeepwarePelatihansController::class, 'index'])->name('pelatihan.index');
+    Route::prefix('/dashboard/pelatihan')->group(function () {
+        // Pelatihan
+        Route::get('/', [DeepwarePelatihansController::class, 'dashboard'])->name('dashboard.pelatihan.dashboard');
+        Route::get('/daftar-pelatihan', [DeepwarePelatihansController::class, 'index'])->name('dashboard.pelatihan.index');
+        Route::get('/referensi', [DeepwarePelatihansController::class, 'referensi'])->name('dashboard.pelatihan.referensi');
+        Route::get('/edit-pelatihan/{id}', [DeepwarePelatihansController::class, 'edit'])->name('dashboard.pelatihan.edit');
+        Route::get('/tambah-pelatihan', [DeepwarePelatihansController::class, 'create'])->name('dashboard.pelatihan.create');
+        Route::put('/update-pelatihan/{id}', [DeepwarePelatihansController::class, 'update'])->name('dashboard.pelatihan.update');
+        Route::delete('/delete-pelatihan/{id}', [DeepwarePelatihansController::class, 'destroy'])->name('dashboard.pelatihan.destroy');
+
+        // Laporan Pelatihan
+        Route::get('/proses-laporan', [DeepwareLaporanPelatihanController::class, 'ProsesLaporan'])->name('Dashboard.Pelatihan.proses-laporan');
+        Route::get('/laporan-pelatihan', [DeepwarePelatihanLaporanController::class, 'index'])->name('Dashboard.Pelatihan.laporan-pelatihan');
+        Route::get('/laporan-usul-pelatihan', [DeepwarePelatihanRegistrasiController::class, 'index'])->name('Dashboard.Pelatihan.usul-pelatihan');
+        Route::get('/verifikasi-registrasi/{pelatihanRegistrasi}', [DeepwarePelatihanRegistrasiController::class, 'showVerifikasiRegistrasi'])->name('Dashboard.Pelatihan.showVerifikasiRegistrasi');
+        Route::put('/verifikasi-registrasi/{pelatihanRegistrasi}', [DeepwarePelatihanRegistrasiController::class, 'VerifikasiRegistrasi'])->name('Dashboard.Pelatihan.verifikasiRegistrasi');
+        Route::get('/verifikasi-laporan/{pelatihanLaporan}', [DeepwarePelatihanLaporanController::class, 'showVerifikasiLaporan'])->name('Dashboard.Pelatihan.showVerifikasiLaporan');
+        Route::put('/verifikasi-laporan/{pelatihanLaporan}', [DeepwarePelatihanLaporanController::class, 'verifikasiLaporan'])->name('Dashboard.Pelatihan.verifikasiLaporan');
+        Route::get('/upload-opd', [DeepwareLaporanPelatihanController::class, 'UploadOPD'])->name('Dashboard.Pelatihan.UploadOPD');
+    });
+
+    // Laporan Pelatihan
+});
+
 // Dashboard routes (protected)
 Route::prefix('dashboard/pelatihan')->group(function () {
     // Pelatihan
-    Route::get('/', [DeepwarePelatihanController::class, 'dashboard'])->name('dashboard.pelatihan.dashboard');
-    Route::get('/pendaftaran', [DeepwarePelatihanController::class, 'pendaftaran'])->name('dashboard.pelatihan.pendaftaran');
-    Route::get('/reverensi', [DeepwarePelatihanController::class, 'reverensi'])->name('dashboard.pelatihan.reverensi');
-    Route::get('/daftar-pelatihan', [DeepwarePelatihanController::class, 'daftarPelatihan'])->name('dashboard.pelatihan.daftar');
-    Route::get('/tambah-pelatihan', [DeepwarePelatihanController::class, 'create'])->name('dashboard.pelatihan.create');
-    Route::get('/edit-pelatihan/{id}', [DeepwarePelatihanController::class, 'edit'])->name('dashboard.pelatihan.edit');
+    // Route::get('/', [DeepwarePelatihanController::class, 'dashboard'])->name('dashboard.pelatihan.dashboard');
+    // Route::get('/pendaftaran', [DeepwarePelatihanController::class, 'pendaftaran'])->name('dashboard.pelatihan.pendaftaran');
+    // Route::get('/reverensi', [DeepwarePelatihanController::class, 'reverensi'])->name('dashboard.pelatihan.reverensi');
+    // Route::get('/daftar-pelatihan', [DeepwarePelatihanController::class, 'daftarPelatihan'])->name('dashboard.pelatihan.daftar');
+    // Route::get('/tambah-pelatihan', [DeepwarePelatihanController::class, 'create'])->name('dashboard.pelatihan.create');
+    // Route::get('/edit-pelatihan/{id}', [DeepwarePelatihanController::class, 'edit'])->name('dashboard.pelatihan.edit');
 
-    // Laporan Pelatihan
-    Route::get('/proses-laporan', [DeepwareLaporanPelatihanController::class, 'ProsesLaporan'])->name('Dashboard.Pelatihan.proses-laporan');
-    Route::get('/laporan-pelatihan', [DeepwareLaporanPelatihanController::class, 'LaporanPelatihan'])->name('Dashboard.Pelatihan.laporan-pelatihan');
-    Route::get('/laporan-usul-pelatihan', [DeepwareLaporanPelatihanController::class, 'UsulPelatihan'])->name('Dashboard.Pelatihan.usul-pelatihan');
-    Route::get('/verifikasi-pelatihan/{id}', [DeepwareLaporanPelatihanController::class, 'VerifikasiPelatihan'])->name('Dashboard.Pelatihan.verifikasi-pelatihan');
-    Route::get('/verifikasi-usul-pelatihan/{id}', [DeepwareLaporanPelatihanController::class, 'VerifikasiUsul'])->name('Dashboard.Pelatihan.verifikasi-usul-pelatihan');
+    // // Laporan Pelatihan
+    // Route::get('/proses-laporan', [DeepwareLaporanPelatihanController::class, 'ProsesLaporan'])->name('Dashboard.Pelatihan.proses-laporan');
+    // Route::get('/laporan-pelatihan', [DeepwareLaporanPelatihanController::class, 'LaporanPelatihan'])->name('Dashboard.Pelatihan.laporan-pelatihan');
+    // Route::get('/laporan-usul-pelatihan', [DeepwareLaporanPelatihanController::class, 'UsulPelatihan'])->name('Dashboard.Pelatihan.usul-pelatihan');
+    // Route::get('/verifikasi-pelatihan/{id}', [DeepwareLaporanPelatihanController::class, 'VerifikasiPelatihan'])->name('Dashboard.Pelatihan.verifikasi-pelatihan');
+    // Route::get('/verifikasi-usul-pelatihan/{id}', [DeepwareLaporanPelatihanController::class, 'VerifikasiUsul'])->name('Dashboard.Pelatihan.verifikasi-usul-pelatihan');
     Route::get('/upload-opd', [DeepwareLaporanPelatihanController::class, 'UploadOPD'])->name('Dashboard.Pelatihan.UploadOPD');
 
     // Kepegawaian

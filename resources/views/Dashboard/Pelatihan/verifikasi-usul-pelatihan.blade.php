@@ -20,48 +20,48 @@
         </div>
 
         <div class="card-body">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('Dashboard.Pelatihan.verifikasiLaporan', $pelatihanLaporan->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-4">
                     <!-- Nama & NIP -->
                     <div class="col-md-12">
                         <label class="form-label fw-bold">Nama</label>
-                        <input type="text" class="form-control form-control-solid" value="Ahmad Fauzi" readonly>
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->registrasi->user->name }}" readonly>
                     </div>
 
                     <!-- NIP & Jabatan -->
                     <div class="col-md-6">
                         <label class="form-label fw-bold">NIP</label>
-                        <input type="text" class="form-control form-control-solid" value="198505152010011001" readonly>
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->registrasi->user->nip }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Jabatan</label>
-                        <input type="text" class="form-control form-control-solid" value="Kepala Seksi Pengembangan"
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->registrasi->user->userPivot->jabatan->jabatan }}"
                             readonly>
                     </div>
 
                     <!-- Unit Kerja & Nama Pelatihan -->
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Unit Kerja</label>
-                        <input type="text" class="form-control form-control-solid" value="BKPSDM Kota Surakarta"
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->registrasi->user->userPivot->unitKerja->unit_kerja }}"
                             readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Nama Pelatihan</label>
                         <input type="text" class="form-control form-control-solid"
-                            value="Pelatihan Kepemimpinan Nasional Tingkat II" readonly>
+                            value="{{ $pelatihanLaporan->registrasi->pelatihan->nama_pelatihan }}" readonly>
                     </div>
 
                     <!-- Waktu & Total Biaya -->
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Waktu Pelatihan</label>
-                        <input type="text" class="form-control form-control-solid" value="1-15 Februari 2024" readonly>
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->registrasi->pelatihan->tanggal_pelaksanaan }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Total Biaya</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rp</span>
-                            <input type="text" class="form-control form-control-solid" value="11.500.000" readonly>
+                            <input type="text" class="form-control form-control-solid" value="{{ $pelatihanLaporan->total_biaya }}" readonly>
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@
                         <div class="d-flex align-items-center gap-2">
                             <a href="#" class="btn btn-light-info w-100 d-flex align-items-center gap-2">
                                 <i class="bi bi-file-pdf"></i>
-                                <span>laporan_biaya.pdf</span>
+                                <span>{{ $pelatihanLaporan->laporan_pelatihan }}</span>
                             </a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="d-flex align-items-center gap-2">
                             <a href="#" class="btn btn-light-info w-100 d-flex align-items-center gap-2">
                                 <i class="bi bi-file-pdf"></i>
-                                <span>sertifikat.pdf</span>
+                                <span>{{ $pelatihanLaporan->sertifikat }}</span>
                             </a>
                         </div>
                     </div>

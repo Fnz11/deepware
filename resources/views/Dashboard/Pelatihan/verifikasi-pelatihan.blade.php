@@ -20,44 +20,48 @@
         </div>
 
         <div class="card-body">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('Dashboard.Pelatihan.verifikasiRegistrasi', $pelatihanRegistrasi->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-4">
                     <!-- Nama & NIP -->
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Nama</label>
-                        <input type="text" class="form-control form-control-solid" value="Ahmad Fauzi" readonly>
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanRegistrasi->user->name }}"
+                            readonly>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold">NIP</label>
-                        <input type="text" class="form-control form-control-solid" value="198505152010011001" readonly>
+                        <input type="text" class="form-control form-control-solid" value="{{ $pelatihanRegistrasi->user->nip }}"
+                            readonly>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label fw-bold">Golongan</label>
-                        <input type="text" class="form-control form-control-solid" value="III/d" readonly>
+                        <input type="text" class="form-control form-control-solid"
+                            value="{{ $pelatihanRegistrasi->user->userPivot->golongan->golongan }}" readonly>
                     </div>
 
                     <!-- Jabatan & Unit Kerja -->
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Jabatan</label>
-                        <input type="text" class="form-control form-control-solid" value="Kepala Seksi Pengembangan"
-                            readonly>
+                        <input type="text" class="form-control form-control-solid"
+                            value="{{ $pelatihanRegistrasi->user->userPivot->jabatan->jabatan }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Unit Kerja</label>
-                        <input type="text" class="form-control form-control-solid" value="BKPSDM Kota Surakarta"
-                            readonly>
+                        <input type="text" class="form-control form-control-solid"
+                            value="{{ $pelatihanRegistrasi->user->userPivot->unitKerja->unit_kerja }}" readonly>
                     </div>
 
                     <!-- Pelatihan & Waktu -->
                     <div class="col-md-8">
                         <label class="form-label fw-bold">Nama Pelatihan</label>
                         <input type="text" class="form-control form-control-solid"
-                            value="Pelatihan Kepemimpinan Nasional Tingkat II" readonly>
+                            value="{{ $pelatihanRegistrasi->pelatihan->nama_pelatihan }}" readonly>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Waktu Pelaksanaan</label>
-                        <input type="text" class="form-control form-control-solid" value="1-15 Februari 2024" readonly>
+                        <input type="text" class="form-control form-control-solid"
+                            value="{{ $pelatihanRegistrasi->pelatihan->tanggal_pelaksanaan }}" readonly>
                     </div>
 
                     <!-- Biaya -->
@@ -65,28 +69,30 @@
                         <label class="form-label fw-bold">Biaya Pelaksanaan</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rp</span>
-                            <input type="text" class="form-control form-control-solid" value="5.000.000">
+                            <input type="text" class="form-control form-control-solid"
+                                value="{{ number_format($pelatihanRegistrasi->biaya_pelatihan, 0, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Biaya Hotel</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rp</span>
-                            <input type="text" class="form-control form-control-solid" value="3.000.000">
+                            <input type="text" class="form-control form-control-solid"
+                                value="{{ number_format($pelatihanRegistrasi->biaya_hotel, 0, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Biaya Akomodasi</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rp</span>
-                            <input type="text" class="form-control form-control-solid" value="2.000.000">
+                            <input type="text" class="form-control form-control-solid"
+                                value="{{ number_format($pelatihanRegistrasi->biaya_akomodasi, 0, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-bold">Uang Harian</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light">Rp</span>
-                            <input type="text" class="form-control form-control-solid" value="1.500.000">
+                            <input type="text" class="form-control form-control-solid"
+                                value="{{ number_format($pelatihanRegistrasi->uang_harian, 0, ',', '.') }}">
                         </div>
                     </div>
 
@@ -94,20 +100,33 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Surat Pengantar/Surat OPD</label>
                         <div class="d-flex align-items-center gap-2">
-                            <a href="#" class="btn btn-light-info w-100 d-flex align-items-center gap-2">
-                                <i class="bi bi-file-pdf"></i>
-                                <span>surat_opd.pdf</span>
                             </a>
                         </div>
+                        @if ($pelatihanRegistrasi->file_usulan)
+                            <div class="d-flex align-items-center gap-2">
+                                <a href="{{ asset('storage/' . $pelatihanRegistrasi->file_usulan) }}" target="_blank"
+                                    class="btn btn-light-info w-100 d-flex align-items-center gap-2">
+                                    <i class="bi bi-file-pdf"></i>
+                                    <span>{{ basename($pelatihanRegistrasi->file_usulan) }}</span>
+                                </a>
+                            </div>
+                        @else
+                            <p class="text-muted">Belum ada file</p>
+                        @endif
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold">File Penawaran</label>
-                        <div class="d-flex align-items-center gap-2">
-                            <a href="#" class="btn btn-light-info w-100 d-flex align-items-center gap-2">
-                                <i class="bi bi-file-pdf"></i>
-                                <span>penawaran.pdf</span>
-                            </a>
-                        </div>
+                        @if ($pelatihanRegistrasi->file_penawaran)
+                            <div class="d-flex align-items-center gap-2">
+                                <a href="{{ asset('storage/' . $pelatihanRegistrasi->file_penawaran) }}" target="_blank"
+                                    class="btn btn-light-info w-100 d-flex align-items-center gap-2">
+                                    <i class="bi bi-file-pdf"></i>
+                                    <span>{{ basename($pelatihanRegistrasi->file_penawaran) }}</span>
+                                </a>
+                            </div>
+                        @else
+                            <p class="text-muted">Belum ada file</p>
+                        @endif
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Surat Tugas</label>
@@ -118,16 +137,19 @@
                     <div class="col-md-12">
                         <label class="form-label fw-bold">Status</label>
                         <select class="form-select form-select-solid" name="status">
-                            <option value="pending">Pending</option>
-                            <option value="approved">Disetujui</option>
-                            <option value="rejected">Ditolak</option>
+                            <option value="proses verifikasi" {{ $pelatihanRegistrasi->status == 'proses verifikasi' ? 'selected' : '' }}>Proses
+                            </option>
+                            <option value="diterima" {{ $pelatihanRegistrasi->status == 'diterima' ? 'selected' : '' }}>Disetujui
+                            </option>
+                            <option value="ditolak" {{ $pelatihanRegistrasi->status == 'ditolak' ? 'selected' : '' }}>Ditolak
+                            </option>
                         </select>
                     </div>
 
                     <div class="col-md-12">
                         <label class="form-label fw-bold">Keterangan</label>
                         <textarea class="form-control form-control-solid" rows="3" name="keterangan"
-                            placeholder="Tambahkan catatan atau keterangan jika diperlukan"></textarea>
+                        placeholder="Tambahkan catatan atau keterangan jika diperlukan">{{ old('keterangan', $pelatihanRegistrasi->keterangan) }}</textarea>
                     </div>
 
                     <!-- Form Actions -->
@@ -136,7 +158,6 @@
                             <button type="button" class="btn btn-light" onclick="window.history.back()">
                                 <i class="bi bi-arrow-left me-2"></i>Batal
                             </button>
-                            <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-check-circle me-2"></i>Simpan
                             </button>
                         </div>

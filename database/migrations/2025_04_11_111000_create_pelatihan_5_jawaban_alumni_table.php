@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->text('jawaban');
             $table->timestamps();
 
-            $table->foreign('alumni_id')->references('alumni_id')->on('pelatihan_5_pascadiklat_alumni')->onDelete('cascade');
+            $table->foreign('alumni_id')->references('id')->on('pelatihan_5_pascadiklat_alumni')->onDelete('cascade');
         });
 
     }

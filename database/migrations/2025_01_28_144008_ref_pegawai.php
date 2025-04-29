@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ref_pegawais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nip')->constrained('users')->onDelete('cascade');
+            $table->string('nip');
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('foto');
             $table->timestamps();
+
+            $table->foreign('nip')->references('nip')->on('users')->onDelete('cascade');
         });
     }
 

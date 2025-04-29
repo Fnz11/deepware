@@ -71,7 +71,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $dummyData = [
                                 [
                                     'tanggal' => '2024-01-15',
@@ -94,19 +94,19 @@
                                     'surat' => '002/ST/BKPSDM/I/2024',
                                 ],
                             ];
-                        @endphp
+                        @endphp --}}
 
-                        @foreach ($dummyData as $index => $item)
+                        @foreach ($pelatihanLaporan as $item)
                             <tr class="border-bottom cursor-pointer"
-                                onclick="window.location.href='{{ route('Dashboard.Pelatihan.verifikasi-pelatihan', $item['id'] ?? 1) }}'">
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td>{{ date('d/m/Y', strtotime($item['tanggal'])) }}</td>
-                                <td>{{ $item['nip'] }}</td>
-                                <td>{{ $item['nama'] }}</td>
-                                <td>{{ $item['jabatan'] }}</td>
-                                <td>{{ $item['unit_kerja'] }}</td>
-                                <td>{{ $item['pelatihan'] }}</td>
-                                <td>{{ $item['waktu'] }}</td>
+                                onclick="window.location.href='{{ route('Dashboard.Pelatihan.showVerifikasiLaporan', $item->id ?? 1) }}'">
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ date('d/m/Y', strtotime($item->registrasi->pelatihan->tanggal_daftar)) }}</td>
+                                <td>{{ $item->registrasi->user->nip }}</td>
+                                <td>{{ $item->registrasi->user->name }}</td>
+                                <td>{{ $item->registrasi->user->userPivot->jabatan->jabatan }}</td>
+                                <td>{{ $item->registrasi->user->userPivot->unitKerja->unit_kerja }}</td>
+                                <td>{{  $item->registrasi->pelatihan->nama_pelatihan }}</td>
+                                <td>{{  $item->registrasi->pelatihan->tanggal_pelaksanaan }}</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-icon btn-sm btn-light-info"
                                         onclick="event.stopPropagation()" data-bs-toggle="tooltip" title="Download">

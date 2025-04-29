@@ -143,59 +143,15 @@
         <li class="menu-header">PELATIHAN</li>
         @if (auth()->user()->role === 'superadmin')
             <li class="menu-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('dashboard.pelatihan.dashboard') }}" class="nav-link">
                     <i class="fa fa-th-large"></i> <span class="menu-text">Dashboard Pelatihan</span>
                 </a>
-            </li>
-            <li class="menu-item has-dropdown">
-                <div class="menu-title">
-                    <i class="fa fa-clipboard-check"></i>
-                    <span class="menu-text">Pelatihan</span>
-                    <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
-                </div>
-                <ul class="submenu">
-                    <li><a href="{{ route('pelatihan.index') }}">List Pelatihan</a></li>
-                    <li><a href="#">Pendaftaran Pelatihan</a></li>
-                    <li><a href="#">Laporan Pelatihan</a></li>
-                </ul>
-            </li>
-            <li class="menu-item has-dropdown">
-                <div class="menu-title">
-                    <i class="fa fa-paper-plane"></i>
-                    <span class="menu-text">Alumni Pelatihan</span>
-                    <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
-                </div>
-                <ul class="submenu">
-                    <li><a href="#">Unknown</a></li>
-                </ul>
             </li>
         @elseif (auth()->user()->role === 'admin')
             <li class="menu-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('dashboard.pelatihan.dashboard') }}" class="nav-link">
                     <i class="fa fa-th-large"></i> <span class="menu-text">Dashboard Pelatihan</span>
                 </a>
-            </li>
-            <li class="menu-item has-dropdown">
-                <div class="menu-title">
-                    <i class="fa fa-clipboard-check"></i>
-                    <span class="menu-text">Pelatihan</span>
-                    <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
-                </div>
-                <ul class="submenu">
-                    <li><a href="{{ route('pelatihan.index') }}">List Pelatihan</a></li>
-                    <li><a href="#">Pendaftaran Pelatihan</a></li>
-                    <li><a href="#">Laporan Pelatihan</a></li>
-                </ul>
-            </li>
-            <li class="menu-item has-dropdown">
-                <div class="menu-title">
-                    <i class="fa fa-paper-plane"></i>
-                    <span class="menu-text">Alumni Pelatihan</span>
-                    <span class="dropdown-icon"><i class="fa fa-chevron-down"></i></span>
-                </div>
-                <ul class="submenu">
-                    <li><a href="#">Unknown</a></li>
-                </ul>
             </li>
         @endif
     </ul>

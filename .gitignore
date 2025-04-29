@@ -1,3 +1,5 @@
+/.github
+/.gitlab
 /.phpunit.cache
 /node_modules
 /public/build

@@ -102,17 +102,17 @@
 
                         @foreach ($dummyData as $index => $item)
                             <tr class="border-bottom cursor-pointer"
-                                onclick="window.location.href='{{ route('Dashboard.Pelatihan.verifikasi-usul-pelatihan', $item['id']) }}'">
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td>{{ $item['nama'] }}</td>
-                                <td>{{ $item['unit_kerja'] }}</td>
-                                <td>{{ date('d/m/Y', strtotime($item['tanggal_daftar'])) }}</td>
-                                <td>{{ $item['pelatihan'] }}</td>
-                                <td>{{ $item['waktu'] }}</td>
-                                <td>Rp {{ $item['biaya_pelatihan'] }}</td>
-                                <td>Rp {{ $item['biaya_hotel'] }}</td>
-                                <td>Rp {{ $item['biaya_akomodasi'] }}</td>
-                                <td>Rp {{ $item['uang_harian'] }}</td>
+                                onclick="window.location.href='{{ route('Dashboard.Pelatihan.showVerifikasiRegistrasi', $item->id) }}'">
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->user->userPivot->unitKerja->unit_kerja }}</td>
+                                <td>{{ date('d/m/Y', strtotime($item->tanggal_daftar)) }}</td>
+                                <td>{{ $item->pelatihan->nama_pelatihan }}</td>
+                                <td>{{ $item->pelatihan->tanggal_pelaksanaan }}</td>
+                                <td>Rp {{ $item->biaya_pelatihan }}</td>
+                                <td>Rp {{ $item->biaya_hotel }}</td>
+                                <td>Rp {{ $item->biaya_akomodasi }}</td>
+                                <td>Rp {{ $item->uang_harian }}</td>
                             </tr>
                         @endforeach
                     </tbody>
